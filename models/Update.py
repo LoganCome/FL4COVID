@@ -8,6 +8,7 @@ from torch.utils.data import DataLoader, Dataset
 import numpy as np
 import random
 from sklearn import metrics
+from utils.util import select_optimizer
 
 
 class DatasetSplit(Dataset):
@@ -33,7 +34,8 @@ class LocalUpdate(object):
     def train(self, net):
         net.train()
         # train and update
-        optimizer = torch.optim.SGD(net.parameters(), lr=self.args.lr, momentum=0.5)
+        # optimizer = torch.optim.SGD(net.parameters(), lr=self.args.lr, momentum=0.5)
+        optimizer = select_optimizer(self.args, net)
 
         epoch_loss = []
         for iter in range(self.args.local_ep):

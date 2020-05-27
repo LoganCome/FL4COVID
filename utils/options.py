@@ -15,7 +15,9 @@ def args_parser():
     parser.add_argument('--bs', type=int, default=128, help="test batch size")
     parser.add_argument('--lr', type=float, default=0.01, help="learning rate")
     parser.add_argument('--momentum', type=float, default=0.5, help="SGD momentum (default: 0.5)")
+    parser.add_argument('--weight_decay', default=1e-7, type=float, help='weight decay (default: 1e-6)')
     parser.add_argument('--split', type=str, default='user', help="train-test split type, user or sample")
+    parser.add_argument('--opt', type=str, default='adam', choices=('sgd', 'adam', 'rmsprop'))
 
     # model arguments
     parser.add_argument('--model', type=str, default='mlp', help='model name')

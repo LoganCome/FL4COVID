@@ -8,7 +8,7 @@ import pandas as pd
 import torch
 import torch.optim as optim
 
-from model.model import CovidNet, CNN
+from models.Nets import CovidNet, CNN
 
 
 def write_score(writer, iter, mode, metrics):

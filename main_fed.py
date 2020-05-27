@@ -12,7 +12,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-from utils.sampling import mnist_iid, mnist_noniid, cifar_iid
+from utils.sampling import mnist_iid, mnist_noniid, cifar_iid, covidx_iid
 from utils.options import args_parser
 from models.Update import LocalUpdate
 from models.Nets import MLP, CNNMnist, CNNCifar, CNN, CovidNet
@@ -50,12 +50,12 @@ if __name__ == '__main__':
             dict_users = cifar_iid(dataset_train, args.num_users)
         else:
             exit('Error: only consider IID setting in CIFAR10')
-    elif arg.dataset == 'covidx':
+    elif args.dataset == 'covidx':
         dataset_train = COVIDxDataset(mode='train', n_classes=args.num_classes, dataset_path=args.root_path,
                                      dim=(224, 224))
         dataset_test = COVIDxDataset(mode='test', n_classes=args.num_classes, dataset_path=args.root_path,
                                    dim=(224, 224))
-
+        '''
         train_params = {'batch_size': args.local_bs,
                         'shuffle': True,
                         'num_workers': 2}
@@ -65,6 +65,12 @@ if __name__ == '__main__':
                        'num_workers': 1}
         train_generator = DataLoader(dataset_train, **train_params)
         test_generator = DataLoader(dataset_test, **test_params)
+        '''
+
+        if args.iid:
+            dict_users = covidx_iid(dataset_train, args.num_users)
+        else:
+            exit('Error: only consider IID setting in COVIDx')
     else:
         exit('Error: unrecognized dataset')
 
@@ -111,6 +117,7 @@ if __name__ == '__main__':
             w, loss = local.train(net=copy.deepcopy(net_glob).to(args.device))
             w_locals.append(copy.deepcopy(w))
             loss_locals.append(copy.deepcopy(loss))
+            print('updated user', idx)
         # update global weights
         w_glob = FedAvg(w_locals)
 

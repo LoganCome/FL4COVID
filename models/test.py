@@ -11,6 +11,10 @@ from torch.utils.data import DataLoader
 def test_img(net_g, datatest, args):
     net_g.eval()
     # testing
+    
+    torch.backends.cudnn.enabled = True
+    torch.backends.cudnn.benchmark = True
+
     test_loss = 0
     correct = 0
     data_loader = DataLoader(datatest, batch_size=args.bs)
