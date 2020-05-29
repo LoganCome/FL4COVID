@@ -94,8 +94,7 @@ if __name__ == '__main__':
         net_glob = CNN(args.num_classes, args.model).to(args.device)
     else:
         exit('Error: unrecognized model')
-    if args.recover != "none":
-        net_glob.load_state_dict(torch.load(args.recover))
+    net_glob.load_state_dict(torch.load(args.test))
     print(net_glob)
     net_glob.train()
 
@@ -113,46 +112,6 @@ if __name__ == '__main__':
     check_point = [i*10 for i in range(1, 10)]
     print('v1.3')
 
-    for iter in range(args.start_ep, args.epochs):
-        w_locals, loss_locals = [], []
-        m = max(int(args.frac * args.num_users), 1)
-        idxs_users = np.random.choice(range(args.num_users), m, replace=False)
-        for idx in idxs_users:
-            local = LocalUpdate(args=args, dataset=dataset_train, idxs=dict_users[idx])
-            w, loss = local.train(net=copy.deepcopy(net_glob).to(args.device))
-            w_locals.append(copy.deepcopy(w))
-            loss_locals.append(copy.deepcopy(loss))
-            update_list[idx] += 1
-            print('updated user', idx)
-        # update global weights
-        w_glob = FedAvg(w_locals)
-
-        # copy weight to net_glob
-        net_glob.load_state_dict(w_glob)
-        if (iter+1) in check_point:
-            torch.save(net_glob.state_dict(), './save/fed_{}_{}_{}_C{}_iid{}_ckp{}.pkl'.format(args.dataset, args.model, args.epochs, args.frac, args.iid, iter+1))
-            # net_glob.eval()
-            # acc_train, loss_train = test_img(net_glob, dataset_train, args)
-            # acc_test, loss_test = test_img(net_glob, dataset_test, args)
-            # print("Training accuracy: {:.2f}".format(acc_train))
-            # print("Testing accuracy: {:.2f}".format(acc_test))
-            # net_glob.train()
-
-
-        # print loss
-        loss_avg = sum(loss_locals) / len(loss_locals)
-        print('Round {:3d}, Average loss {:.3f}'.format(iter, loss_avg))
-        loss_train.append(loss_avg)
-
-    # plot loss curve
-    np.save('./save/fed_{}_{}_{}_C{}_iid{}_loss.npy'.format(args.dataset, args.model, args.epochs, args.frac, args.iid), loss_train)
-    np.save('./save/fed_{}_{}_{}_C{}_iid{}_update.npy'.format(args.dataset, args.model, args.epochs, args.frac, args.iid), update_list)
-    torch.save(net_glob.state_dict(), './save/fed_{}_{}_{}_C{}_iid{}.pkl'.format(args.dataset, args.model, args.epochs, args.frac, args.iid))
-
-    plt.figure()
-    plt.plot(range(len(loss_train)), loss_train)
-    plt.ylabel('train_loss')
-    plt.savefig('./save/fed_{}_{}_{}_C{}_iid{}.png'.format(args.dataset, args.model, args.epochs, args.frac, args.iid))
 
     # testing
     net_glob.eval()

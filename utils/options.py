@@ -8,6 +8,7 @@ def args_parser():
     parser = argparse.ArgumentParser()
     # federated arguments
     parser.add_argument('--epochs', type=int, default=10, help="rounds of training")
+    parser.add_argument('--start_ep', type=int, default=0, help="begin rounds of training")
     parser.add_argument('--num_users', type=int, default=100, help="number of users: K")
     parser.add_argument('--frac', type=float, default=0.1, help="the fraction of clients: C")
     parser.add_argument('--local_ep', type=int, default=5, help="the number of local epochs: E")
@@ -40,8 +41,10 @@ def args_parser():
     parser.add_argument('--seed', type=int, default=1, help='random seed (default: 1)')
 
     # for covidnet
-    parser.add_argument('--root_path', type=str, default='./data',
-                        help='path to dataset ')
+    parser.add_argument('--root_path', type=str, default='./data', help='path to dataset ')
+    parser.add_argument('--test', type=str, default='./save/fed_covidx_covidnet_small_100_C0.4_iidTrue_ckp10.pkl', help='path to test model ')
+    parser.add_argument('--recover', type=str, default='none', help='path to continue train model ')
+
 
     args = parser.parse_args()
     return args
