@@ -4,3 +4,4 @@ data
 .DS_Store
 *.zip
 __pycache__
+save

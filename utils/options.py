@@ -44,6 +44,7 @@ def args_parser():
     parser.add_argument('--root_path', type=str, default='./data', help='path to dataset ')
     parser.add_argument('--test', type=str, default='./save/fed_covidx_covidnet_small_100_C0.4_iidTrue_ckp10.pkl', help='path to test model ')
     parser.add_argument('--recover', type=str, default='none', help='path to continue train model ')
+    parser.add_argument('--withlabel', action='store_true', help='test with label')
 
 
     args = parser.parse_args()

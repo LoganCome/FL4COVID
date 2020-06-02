@@ -3,3 +3,7 @@ python main_fed.py --model=covidnet_small --dataset=covidx --epochs=10 --num_use
 python test_model.py --model=covidnet_small --dataset=covidx --epochs=10 --num_users=5 --local_ep=3 --frac=0.4 --iid --lr=2e-5 --local_bs=10 --test='./save/fed_covidx_covidnet_small_100_C0.4_iidTrue_ckp10.pkl'
 
 python main_fed.py --model=covidnet_small --dataset=covidx --epochs=10 --start_ep=10 --num_users=5 --local_ep=3 --frac=0.4 --iid --lr=2e-5 --local_bs=10 --recover='./save/fed_covidx_covidnet_small_100_C0.4_iidTrue_ckp10.pkl'
+
+python test_model.py --model=covidnet_small --dataset=covidx --epochs=10 --num_users=5 --local_ep=3 --frac=0.4 --iid --lr=2e-5 --local_bs=10 --withlabel --test='./save/fed_covidx_covidnet_small_100_C0.4_iidTrue.pkl'
+
+python main_nn.py --model=covidnet_small --epoch=10 --lr=2e-5 --local_bs=10 --num_classes=3

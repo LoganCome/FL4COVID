@@ -17,7 +17,7 @@ from utils.options import args_parser
 from models.Update import LocalUpdate
 from models.Nets import MLP, CNNMnist, CNNCifar, CNN, CovidNet
 from models.Fed import FedAvg
-from models.test import test_img
+from models.test import test_img, test_img_with_label
 from data_loader.covidxdataset import COVIDxDataset
 from models.metric import accuracy
 from utils.util import print_stats, print_summary, select_model, select_optimizer, MetricTracker
@@ -115,8 +115,21 @@ if __name__ == '__main__':
 
     # testing
     net_glob.eval()
-    acc_train, loss_train = test_img(net_glob, dataset_train, args)
-    acc_test, loss_test = test_img(net_glob, dataset_test, args)
-    print("Training accuracy: {:.2f}".format(acc_train))
-    print("Testing accuracy: {:.2f}".format(acc_test))
+    
+    if args.withlabel:
+        cor = {'pneumonia':0, 'COVID-19':0, 'normal':0}
+        tot = {'pneumonia':0, 'COVID-19':0, 'normal':0}
+        
+        acc_train, loss_train = test_img_with_label(net_glob, dataset_train, args, cor, tot)
+        acc_test, loss_test = test_img_with_label(net_glob, dataset_test, args, cor, tot)
+        for key in cor:
+            print(key, cor[key], tot[key], cor[key]/tot[key])
+
+        print("Training accuracy: {:.2f}".format(acc_train))
+        print("Testing accuracy: {:.2f}".format(acc_test))
+    else:
+        acc_train, loss_train = test_img(net_glob, dataset_train, args)
+        acc_test, loss_test = test_img(net_glob, dataset_test, args)
+        print("Training accuracy: {:.2f}".format(acc_train))
+        print("Testing accuracy: {:.2f}".format(acc_test))
 
