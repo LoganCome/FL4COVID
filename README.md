@@ -15,21 +15,20 @@ PyTorch implementation of COVID-Net, training with CODIVx v3 dataset
 This repo is forked from <a href="https://github.com/lindawangg">https://github.com/lindawangg</a> and  <a href="https://github.com/IliasPap/COVIDNet">https://github.com/IliasPap/COVIDNet</a>
 
 ## Citation
-
 If you find this code useful for your research, please cite our paper:
 
-@article{liu2020experiments,
-  title={Experiments of federated learning for covid-19 chest x-ray images},
-  author={Liu, Boyi and Yan, Bingjie and Zhou, Yize and Yang, Yifan and Zhang, Yixian},
-  journal={arXiv preprint arXiv:2007.05592},
-  year={2020}
+@article{liu2020experiments, <br>
+  title={Experiments of federated learning for covid-19 chest x-ray images}, <br>
+  author={Liu, Boyi and Yan, Bingjie and Zhou, Yize and Yang, Yifan and Zhang, Yixian}, <br>
+  journal={arXiv preprint arXiv:2007.05592}, <br>
+  year={2020} <br>
 }
 
-@inproceedings{yan2021experiments,
-  title={Experiments of federated learning for COVID-19 chest X-ray images},
-  author={Yan, Bingjie and Wang, Jun and Cheng, Jieren and Zhou, Yize and Zhang, Yixian and Yang, Yifan and Liu, Li and Zhao, Haojiang and Wang, Chunjuan and Liu, Boyi},
-  booktitle={Advances in Artificial Intelligence and Security: 7th International Conference, ICAIS 2021, Dublin, Ireland, July 19-23, 2021, Proceedings, Part II 7},
-  pages={41--53},
-  year={2021},
-  organization={Springer}
+@inproceedings{yan2021experiments, <br>
+  title={Experiments of federated learning for COVID-19 chest X-ray images}, <br>
+  author={Yan, Bingjie and Wang, Jun and Cheng, Jieren and Zhou, Yize and Zhang, Yixian and Yang, Yifan and Liu, Li and Zhao, Haojiang and Wang, Chunjuan and Liu, Boyi}, <br>
+  booktitle={Advances in Artificial Intelligence and Security: 7th International Conference, ICAIS 2021, Dublin, Ireland, July 19-23, 2021, Proceedings, Part II 7}, <br>
+  pages={41--53}, <br>
+  year={2021}, <br>
+  organization={Springer} <br>
 }
