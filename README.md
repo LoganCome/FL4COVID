@@ -16,7 +16,8 @@ This repo is forked from <a href="https://github.com/lindawangg">https://github.
 
 ## Citation
 If you find this code useful for your research, please cite our paper:
-<small>
+
+```
 @article{liu2020experiments, <br>
   title={Experiments of federated learning for covid-19 chest x-ray images}, <br>
   author={Liu, Boyi and Yan, Bingjie and Zhou, Yize and Yang, Yifan and Zhang, Yixian}, <br>
@@ -32,4 +33,4 @@ If you find this code useful for your research, please cite our paper:
   year={2021}, <br>
   organization={Springer} <br>
 }
-</small>
+```
